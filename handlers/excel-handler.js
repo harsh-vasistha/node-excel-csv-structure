@@ -8,8 +8,7 @@ const read_stage_excel = (index, workbook) => {
     return excel.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[index]]);
 }
 
-const sorted_data = (sheet_data) => {
-    var data = {};
+const sorted_data = (sheet_data, data) => {
     for (var i in sheet_data) {
         if (!data.hasOwnProperty(sheet_data[i].Object_Name__c)) {
             data[sheet_data[i].Object_Name__c] = {};
@@ -18,6 +17,7 @@ const sorted_data = (sheet_data) => {
             data[sheet_data[i].Object_Name__c][sheet_data[i].Rank] = [];
         }
         data[sheet_data[i].Object_Name__c][sheet_data[i].Rank].push(sheet_data[i]);
+        console.log('Processed '+sheet_data[i].Object_Name__c)
     }
     return data;
 }
